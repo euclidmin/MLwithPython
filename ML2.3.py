@@ -76,29 +76,47 @@ import numpy as np
 
 
 
-from sklearn.datasets import load_breast_cancer
+# from sklearn.datasets import load_breast_cancer
+# from sklearn.model_selection import train_test_split
+# from sklearn.neighbors import KNeighborsClassifier
+#
+# cancer = load_breast_cancer()
+# X_train, X_test, y_train, y_test = train_test_split(
+#     cancer.data, cancer.target, stratify=cancer.target, random_state=66)
+#
+# training_accuracy = []
+# test_accuracy = []
+#
+# neighbors_settings = range(1, 11)
+# for n_neightbors in neighbors_settings:
+#     clf = KNeighborsClassifier(n_neighbors=n_neightbors)
+#     clf.fit(X_train, y_train)
+#     training_accuracy.append(clf.score(X_train, y_train))
+#     test_accuracy.append(clf.score(X_test, y_test))
+#
+# plt.plot(neighbors_settings, training_accuracy, label="훈력 정확도")
+# plt.plot(neighbors_settings, test_accuracy, label="테스트 정확도")
+# plt.ylabel("정확도")
+# plt.xlabel("n_neighbors")
+# plt.legend()
+# plt.show()
+
+# mglearn.plots.plot_knn_regression(n_neighbors=1)
+# mglearn.plots.plot_knn_regression(n_neighbors=3)
+
+from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import train_test_split
-from sklearn.neighbors import KNeighborsClassifier
 
-cancer = load_breast_cancer()
-X_train, X_test, y_train, y_test = train_test_split(
-    cancer.data, cancer.target, stratify=cancer.target, random_state=66)
+X, y = mglearn.datasets.make_wave(n_samples=40)
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
 
-training_accuracy = []
-test_accuracy = []
+reg = KNeighborsRegressor(n_neighbors=3)
+reg.fit(X_train, y_train)
+print("테스트 세트 예측:\n{}".format(reg.predict(X_test)))
+print("테스트 세트 R^2:{:.2f}".format(reg.score(X_test, y_test)))
 
-neighbors_settings = range(1, 11)
-for n_neightbors in neighbors_settings:
-    clf = KNeighborsClassifier(n_neighbors=n_neightbors)
-    clf.fit(X_train, y_train)
-    training_accuracy.append(clf.score(X_train, y_train))
-    test_accuracy.append(clf.score(X_test, y_test))
 
-plt.plot(neighbors_settings, training_accuracy, label="훈력 정확도")
-plt.plot(neighbors_settings, test_accuracy, label="테스트 정확도")
-plt.ylabel("정확도")
-plt.xlabel("n_neighbors")
-plt.legend()
-plt.show()
+
+
 
 
