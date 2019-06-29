@@ -2,7 +2,7 @@ import mglearn
 import matplotlib.pyplot as plt
 import numpy as np
 
-
+#
 # #데이터 셋을 만듭니다.
 # x, y = mglearn.datasets.make_forge()
 # #산점도를 그립니다.
@@ -22,27 +22,27 @@ import numpy as np
 # plt.show()
 
 
-#
-# from sklearn.datasets import load_breast_cancer
-# cancer = load_breast_cancer()
-# print("cancer.keys(): \n{}".format(cancer.keys()))
-# print("유방암 데이터의 형태:{}".format(cancer.data.shape))
-# print("클래스별 샘플 개수:\{}".format(
-#     {n: v for n, v in zip(cancer.target_names, np.bincount(cancer.target))}
-# ))
-# print(cancer.target_names)
-# print(cancer.target)
-# print("특성이름:\n{}".format(cancer.feature_names))
+
+from sklearn.datasets import load_breast_cancer
+cancer = load_breast_cancer()
+print("cancer.keys(): \n{}".format(cancer.keys()))
+print("유방암 데이터의 형태:{}".format(cancer.data.shape))
+print("클래스별 샘플 개수:\{}".format(
+    {n: v for n, v in zip(cancer.target_names, np.bincount(cancer.target))}
+))
+print(cancer.target_names)
+print(cancer.target)
+print("특성이름:\n{}".format(cancer.feature_names))
 
 
 
 
-# from sklearn.datasets import load_boston
-# boston = load_boston()
-# print("데이터의 형태:{}".format(boston.data.shape))
-#
-# X, y = mglearn.datasets.load_extended_boston()
-# print("X.shape:{}".format(X.shape))
+from sklearn.datasets import load_boston
+boston = load_boston()
+print("데이터의 형태:{}".format(boston.data.shape))
+
+X, y = mglearn.datasets.load_extended_boston()
+print("X.shape:{}".format(X.shape))
 
 
 
@@ -101,8 +101,8 @@ import numpy as np
 # plt.legend()
 # plt.show()
 
-# mglearn.plots.plot_knn_regression(n_neighbors=1)
-# mglearn.plots.plot_knn_regression(n_neighbors=3)
+mglearn.plots.plot_knn_regression(n_neighbors=1)
+mglearn.plots.plot_knn_regression(n_neighbors=3)
 
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import train_test_split
