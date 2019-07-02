@@ -2,56 +2,62 @@ import mglearn
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 
-# mglearn.plots.plot_linear_regression_wave()
+mglearn.plots.plot_linear_regression_wave()
 
 
-# X, y = mglearn.datasets.make_wave(n_samples=60)
-# X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
-# lr = LinearRegression().fit(X_train, y_train)
-# print("lr.coef_:{}".format(lr.coef_))
-# print("lr.intercept_:{}".format(lr.intercept_))
-# print("훈련 세트 점수: {:.2f}".format(lr.score(X_train, y_train)))
-# print("테스트 세트 점수: {:.2f}".format(lr.score(X_test, y_test)))
+X, y = mglearn.datasets.make_wave(n_samples=60)
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
+lr = LinearRegression().fit(X_train, y_train)
+print("lr.coef_:{}".format(lr.coef_))
+print("lr.intercept_:{}".format(lr.intercept_))
+print("훈련 세트 점수: {:.2f}".format(lr.score(X_train, y_train)))
+print("테스트 세트 점수: {:.2f}".format(lr.score(X_test, y_test)))
 
 
-# X, y = mglearn.datasets.load_extended_boston()
-#
-# X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
-# lr = LinearRegression().fit(X_train, y_train)
-# print("lr.coef_:{}".format(lr.coef_))
-# print("lr.intercept_:{}".format(lr.intercept_))
-# print("훈련 세트 점수: {:.2f}".format(lr.score(X_train, y_train)))
-# print("테스트 세트 점수: {:.2f}".format(lr.score(X_test, y_test)))
-#
-#
-# from sklearn.linear_model import Ridge
-#
-# ridge = Ridge().fit(X_train, y_train)
-# print("훈련 세트 점수: {:.2f}".format(ridge.score(X_train, y_train)))
-# print("테스트 세트 점수: {:.2f}".format(ridge.score(X_test, y_test)))
-#
-# ridge10 = Ridge(alpha=10).fit(X_train, y_train)
-# print("훈련 세트 점수: {:.2f}".format(ridge10.score(X_train, y_train)))
-# print("테스트 세트 점수: {:.2f}".format(ridge10.score(X_test, y_test)))
-#
-# ridge01 = Ridge(alpha=0.1).fit(X_train, y_train)
-# print("훈련 세트 점수: {:.2f}".format(ridge01.score(X_train, y_train)))
-# print("테스트 세트 점수: {:.2f}".format(ridge01.score(X_test, y_test)))
-#
-# import matplotlib.pyplot as plt
-#
-# plt.plot(ridge10.coef_, '^', label="Ridge alpha=10")
-# plt.plot(ridge.coef_, 's', label="Ridge alpha=1")
-# plt.plot(ridge01.coef_, 'v', label="Ridge alpha=0.1")
-#
-# plt.plot(lr.coef_, 'o', label="LinearRegression")
-# plt.xlabel("계수 목록")
-# plt.ylabel("계수 크기")
-# plt.hlines(0, 0, len(lr.coef_))
-# plt.ylim(-25, 25)
-# plt.legend()
-# plt.show()
-#
+X, y = mglearn.datasets.load_extended_boston()
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+lr = LinearRegression().fit(X_train, y_train)
+print("lr.coef_:{}".format(lr.coef_))
+print("lr.intercept_:{}".format(lr.intercept_))
+print("훈련 세트 점수: {:.2f}".format(lr.score(X_train, y_train)))
+print("테스트 세트 점수: {:.2f}".format(lr.score(X_test, y_test)))
+
+
+from sklearn.linear_model import Ridge
+
+ridge = Ridge().fit(X_train, y_train)
+print("훈련 세트 점수: {:.2f}".format(ridge.score(X_train, y_train)))
+print("테스트 세트 점수: {:.2f}".format(ridge.score(X_test, y_test)))
+
+ridge10 = Ridge(alpha=10).fit(X_train, y_train)
+print("훈련 세트 점수: {:.2f}".format(ridge10.score(X_train, y_train)))
+print("테스트 세트 점수: {:.2f}".format(ridge10.score(X_test, y_test)))
+
+ridge01 = Ridge(alpha=0.1).fit(X_train, y_train)
+print("훈련 세트 점수: {:.2f}".format(ridge01.score(X_train, y_train)))
+print("테스트 세트 점수: {:.2f}".format(ridge01.score(X_test, y_test)))
+
+
+for rig in [Ridge(0.1), Ridge(1.0), Ridge(5), Ridge(10)]:
+    rig.fit(X_train, y_train)
+    rig.score(X_test, y_test)
+
+
+import matplotlib.pyplot as plt
+
+plt.plot(ridge10.coef_, '^', label="Ridge alpha=10")
+plt.plot(ridge.coef_, 's', label="Ridge alpha=1")
+plt.plot(ridge01.coef_, 'v', label="Ridge alpha=0.1")
+
+plt.plot(lr.coef_, 'o', label="LinearRegression")
+plt.xlabel("계수 목록")
+plt.ylabel("계수 크기")
+plt.hlines(0, 0, len(lr.coef_))
+plt.ylim(-25, 25)
+plt.legend()
+plt.show()
+
 #
 # from sklearn.linear_model import Lasso
 # import numpy as np
@@ -136,32 +142,32 @@ from sklearn.linear_model import LinearRegression
 # plt.legend()
 # plt.show()
 
-from sklearn.datasets import make_blobs
-import matplotlib.pyplot as plt
-X, y = make_blobs(random_state=42)
-mglearn.discrete_scatter(X[:, 0], X[:,1], y)
-plt.xlabel("특성 0")
-plt.ylabel("특성 1")
-plt.legend(["클래스 0", "클래스 1", "클래스 2"])
-plt.show()
-
-from sklearn.svm import LinearSVC
-import numpy as np
-linear_svm = LinearSVC().fit(X, y)
-print("계수 배열의 크기: ", linear_svm.coef_.shape)
-print("절편 배열의 크기: ", linear_svm.intercept_.shape)
-
-mglearn.discrete_scatter(X[:, 0], X[:, 1], y)
-line = np.linspace(-15, 15)
-for coef, intercept, color in zip(linear_svm.coef_, linear_svm.intercept_, mglearn.cm3.colors):
-    plt.plot(line, -(line * coef[0] + intercept) / coef[1], c=color)
-
-plt.ylim(-10, 15)
-plt.xlim(-10, 8)
-plt.xlabel("특성 0")
-plt.ylabel("특성 1")
-plt.legend(['클래스 0', '클래스 1', '클래스 2', '클래스 0 경계', '클래스 1 경계', '클래스 2 경계'])
-plt.show()
+# from sklearn.datasets import make_blobs
+# import matplotlib.pyplot as plt
+# X, y = make_blobs(random_state=42)
+# mglearn.discrete_scatter(X[:, 0], X[:,1], y)
+# plt.xlabel("특성 0")
+# plt.ylabel("특성 1")
+# plt.legend(["클래스 0", "클래스 1", "클래스 2"])
+# plt.show()
+#
+# from sklearn.svm import LinearSVC
+# import numpy as np
+# linear_svm = LinearSVC().fit(X, y)
+# print("계수 배열의 크기: ", linear_svm.coef_.shape)
+# print("절편 배열의 크기: ", linear_svm.intercept_.shape)
+#
+# mglearn.discrete_scatter(X[:, 0], X[:, 1], y)
+# line = np.linspace(-15, 15)
+# for coef, intercept, color in zip(linear_svm.coef_, linear_svm.intercept_, mglearn.cm3.colors):
+#     plt.plot(line, -(line * coef[0] + intercept) / coef[1], c=color)
+#
+# plt.ylim(-10, 15)
+# plt.xlim(-10, 8)
+# plt.xlabel("특성 0")
+# plt.ylabel("특성 1")
+# plt.legend(['클래스 0', '클래스 1', '클래스 2', '클래스 0 경계', '클래스 1 경계', '클래스 2 경계'])
+# plt.show()
 
     
 
